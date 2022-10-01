@@ -37,7 +37,7 @@ export const NavBar = (props) => {
             <Typography
               variant="h6"
               component="div"
-              align="center"
+              align="right"
               sx={{ flexGrow: 1 }}
             >
               {props.title}
