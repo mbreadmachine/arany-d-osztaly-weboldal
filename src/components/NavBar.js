@@ -1,14 +1,17 @@
 import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import {
+  ListItemText,
+  ListItemIcon,
+  ListItemButton,
+  ListItem,
+  IconButton,
+  Drawer,
+  Typography,
+  Toolbar,
+  Box,
+  AppBar,
+  Divider
+} from "@mui/material";
 import { Menu, Home, ViewTimeline } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
@@ -49,11 +52,14 @@ export const NavBar = (props) => {
         <Box
           sx={{ height: "100%", backgroundColor: accentColor, color: "white" }}
         >
+          <Typography variant="h6" align="center" sx={{ position: "relative", bottom: "-10px" }}>5.d Információs weboldal</Typography>
+          <br />
+          <Divider />
           {pages.map((page) => (
             <Link to={page.path} className="link">
-              <ListItem key={page.index} disablePadding sx={{ width: "300px" }} >
+              <ListItem key={page.index} disablePadding sx={{ width: "300px" }}>
                 <ListItemButton>
-                  <ListItemIcon color="primary" sx={{ color: "white" }} >
+                  <ListItemIcon color="primary" sx={{ color: "white" }}>
                     {page.icon}
                   </ListItemIcon>
                   <ListItemText primary={page.name} />
