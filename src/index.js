@@ -5,7 +5,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
-import { AllHomeWorks } from './pages/AllHomeWorks';
 import ClassTimeTablePage from "./pages/ClassTimeTable"
 
 const mainRouter = createBrowserRouter([
@@ -16,11 +15,7 @@ const mainRouter = createBrowserRouter([
   {
     path: "/timetable",
     element: <ClassTimeTablePage />,
-  },
-  // {
-  //   path: "/homeworks",
-  //   element: <AllHomeWorks />
-  // }
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -20,7 +20,6 @@ export const NavBar = (props) => {
   const pages = [
     { name: "Főoldal", icon: <Home />, path: "/" },
     { name: "Órarend", icon: <ViewTimeline />, path: "/timetable" },
-    // { name: "Összes házi", icon: <Class />, path: "/homeworks" }
   ];
   const accentColor = "#4661e7"; // #634427
   return (
