@@ -1,5 +1,5 @@
 import "./App.css";
-import { Typography, Divider, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { NavBar } from "./components/NavBar";
 import React from "react";
 import { HomeWorkCard } from "./components/HomeWorkCard";
@@ -38,7 +38,7 @@ function App() {
       <Typography variant="h5" align="center">Mai Házi Feladat:</Typography>
       <br />
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <HomeWorkCard data={todaysHomework} />
+        <HomeWorkCard data={todaysHomework} isSingle={true} />
       </Box>
     
     </div>
