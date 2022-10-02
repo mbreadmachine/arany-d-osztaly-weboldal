@@ -35,7 +35,7 @@ function App() {
         Üdvözöllek az 5.d információs weboldalán!
       </Typography>
       <br />
-      <Typography variant="h5" align="center">Add meg azt a dátumot, amikor szeretnéd látni a házi feladatot:</Typography>
+      <Typography variant="h5" align="center">Add meg azt a dátumot, amelyik napi házi feladatot szeretnéd látni:</Typography>
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <input type="date" placeholder="Dátum" style={{ width: 200, height: 30 }} value={date} onChange={(e) => setDate(e.target.value) } />
         <Typography variant="h5" align="center">A {date} dátumi házi feladat:</Typography>
