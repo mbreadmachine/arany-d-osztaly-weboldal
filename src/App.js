@@ -6,17 +6,17 @@ import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase"
 
 function App() {
-  const [todaysHomework, setTodaysHomework ] = React.useState([])
-  const today = new Date().toISOString().slice(0, 10)
+  const [datesHomework, setDatesHomework ] = React.useState([])
+  const [ date, setDate ] = React.useState(new Date().toISOString().slice(0, 10))
   
 
-  const getTodaysHomework = async () => {
+  const getSetDatesHomework = async () => {
     try {
-      const { data, error } = await supabase.from('homework').select().eq("date", today)
+      const { data, error } = await supabase.from('homework').select().eq("date", date)
       if (error) {
         throw(error.message)
       }
-      setTodaysHomework(data)
+      setDatesHomework(data)
 
     } catch (err) {
       alert("hiba történt: " + err)
@@ -24,8 +24,8 @@ function App() {
   }
 
   React.useEffect(() => {
-    getTodaysHomework()
-  }, [])
+    getSetDatesHomework()
+  }, [date])
 
   return (
     <div className="App">
@@ -35,10 +35,13 @@ function App() {
         Üdvözöllek az 5.d információs weboldalán!
       </Typography>
       <br />
-      <Typography variant="h5" align="center">Mai Házi Feladat:</Typography>
-      <br />
+      <Typography variant="h5" align="center">Add meg azt a dátumot, amikor szeretnéd látni a házi feladatot:</Typography>
       <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <HomeWorkCard data={todaysHomework} isSingle={true} />
+        <input type="date" placeholder="Dátum" style={{ width: 200, height: 30 }} value={date} onChange={(e) => setDate(e.target.value) } />
+        <Typography variant="h5" align="center">A {date} dátumi házi feladat:</Typography>
+        <br />
+        {datesHomework.length == 0 ? <Typography variant="subtitle" color="white">Nincs erre a napra házi, válassz új napot.</Typography> : <HomeWorkCard data={datesHomework} isSingle={true} /> }
+        
       </Box>
     
     </div>
