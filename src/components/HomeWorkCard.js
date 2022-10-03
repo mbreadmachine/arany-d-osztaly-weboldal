@@ -8,7 +8,7 @@ export const HomeWorkCard = (props) => {
   return (
     <>
       {props.data.map((e) => (
-        <Card sx={{ width: 345, height: 300 }}>
+        <Card sx={{ width: 345, minHeight: 300 }}>
           <CardHeader
             avatar={<HomeWork />}
             title="Házi feladat"
