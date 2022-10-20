@@ -19,7 +19,7 @@ export const HomeWorkCard = (props) => {
               variant="body2"
               color="text.secondary"
               dangerouslySetInnerHTML={{
-                __html: e.homework.replace("\n", "<br />"),
+                __html: e.homework.replaceAll("\n", "<br />"),
               }}
             ></Typography>
           </CardContent>
