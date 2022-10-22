@@ -59,10 +59,11 @@ const ClassMoney = () => {
           Keresés
         </LoadingButton>
         <div className="kidContainer">
+        <Typography variant="h6" align="center">Keresés: "{savedSearch}"</Typography>
           {searchResults.length !== 0
             ? searchResults?.map((kid) => (
                 <>
-                  <Typography variant="h6" align="center">Keresés: "{savedSearch}"</Typography>
+                  
                   <Accordion>
                     <AccordionSummary
                       expandIcon={<ExpandMore />}
