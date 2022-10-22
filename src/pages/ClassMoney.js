@@ -22,7 +22,9 @@ const ClassMoney = () => {
       const { data, error } = await supabase
         .from("classmoney")
         .select()
-        .textSearch("child_name", currentSearch);
+        .textSearch("child_name", currentSearch, {
+          type: "websearch"
+        });
       if (error) throw error;
       setSearchResults(data);
     } catch (err) {
