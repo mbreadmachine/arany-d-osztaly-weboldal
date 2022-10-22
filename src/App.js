@@ -40,7 +40,7 @@ function App() {
         <input type="date" placeholder="Dátum" style={{ width: 200, height: 30 }} value={date} onChange={(e) => setDate(e.target.value) } />
         <Typography variant="h5" align="center">A {date} dátumi házi feladat:</Typography>
         <br />
-        {datesHomework.length == 0 ? <Typography variant="subtitle" color="white">Nincs erre a napra házi, válassz új napot.</Typography> : <HomeWorkCard data={datesHomework} isSingle={true} /> }
+        {datesHomework.length === 0 ? <Typography variant="subtitle" color="white">Nincs erre a napra házi, válassz új napot.</Typography> : <HomeWorkCard data={datesHomework} isSingle={true} /> }
         
       </Box>
     

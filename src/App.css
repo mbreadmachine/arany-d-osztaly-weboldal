@@ -8,7 +8,7 @@ body {
   background-color: rgb(60, 60, 60);
 }
 
-.App, .Timetable {
+.App, .Timetable, .ClassMoney {
   color: white;
   /* display: flex;
   flex-direction: column; */
@@ -23,4 +23,23 @@ table, td{
 .link {
   text-decoration: none;
   color: white;
+}
+
+.ClassMoney {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.searchBox {
+  width: 9cm;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.kidContainer {
+  /* border: 2px dashed white; */
+  min-width: 340px;
 }

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import App from './App';
 import ClassTimeTablePage from "./pages/ClassTimeTable"
+import ClassMoney from "./pages/ClassMoney"
 
 const mainRouter = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const mainRouter = createBrowserRouter([
   {
     path: "/timetable",
     element: <ClassTimeTablePage />,
+  },
+  {
+    path: "/money",
+    element: <ClassMoney />,
   }
 ])
 
