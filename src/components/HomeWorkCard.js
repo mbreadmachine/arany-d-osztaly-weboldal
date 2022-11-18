@@ -4,7 +4,10 @@ import { Typography, CardContent, CardHeader, Card } from "@mui/material";
 
 import { HomeWork } from "@mui/icons-material";
 
+import ReactMarkdown from "react-markdown";
+
 export const HomeWorkCard = (props) => {
+
   return (
     <>
       {props.data.map((e) => (
@@ -18,10 +21,14 @@ export const HomeWorkCard = (props) => {
             <Typography
               variant="body2"
               color="text.secondary"
-              dangerouslySetInnerHTML={{
-                __html: e.homework.replaceAll("\n", "<br />"),
-              }}
-            ></Typography>
+              // dangerouslySetInnerHTML={{
+              //   __html: formatHomework(e.homework),
+              // }}
+            >
+              <ReactMarkdown>
+                {e.homework}
+              </ReactMarkdown>
+            </Typography>
           </CardContent>
         </Card>
       ))}
