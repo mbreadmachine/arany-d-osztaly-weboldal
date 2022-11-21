@@ -1,17 +1,14 @@
 import React from "react";
-
 import { Typography, CardContent, CardHeader, Card } from "@mui/material";
-
 import { HomeWork } from "@mui/icons-material";
-
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const HomeWorkCard = (props) => {
-
   return (
     <>
       {props.data.map((e) => (
-        <Card sx={{ width: 345, minHeight: 300 }}>
+        <Card sx={{ minWidth: 345, minHeight: 300 }}>
           <CardHeader
             avatar={<HomeWork />}
             title="Házi feladat"
@@ -25,7 +22,7 @@ export const HomeWorkCard = (props) => {
               //   __html: formatHomework(e.homework),
               // }}
             >
-              <ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {e.homework}
               </ReactMarkdown>
             </Typography>

@@ -50,3 +50,7 @@ code {
   border-radius: 5px;
   background-color: rgb(249, 249, 249);
 }
+
+img {
+  width: fit-content;
+}
