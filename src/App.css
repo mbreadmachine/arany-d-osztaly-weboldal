@@ -43,3 +43,10 @@ table, td{
   /* border: 2px dashed white; */
   min-width: 340px;
 }
+
+code {
+  font-family: monospace;
+  border: 1px black solid;
+  border-radius: 5px;
+  background-color: rgb(249, 249, 249);
+}
