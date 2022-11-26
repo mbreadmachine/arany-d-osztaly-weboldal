@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 
 const ClassTimeTablePage = () => {
-  const printClassTimetable = () => {
+  const printClassTimetable = (ifPrint) => {
     var timetable = window.open("", "", "height=500, width=1000");
     timetable.document.write(`
     <div class="container">
       <h6>Angolos órarend</h6>
       <br />
-      <table className="classtable">
+      <table class="classtable">
         <thead>
           <tr>
             <th>Hétfő</th>
@@ -30,7 +30,7 @@ const ClassTimeTablePage = () => {
           <tr>
             <td>&nbsp;Magyar irodalom</td>
             <td>&nbsp;Angol</td>
-            <td>&nbsp;Angol</td>
+            <td>&nbsp;Környezet</td>
             <td>&nbsp;Természetismeret</td>
             <td>&nbsp;Matematika</td>
           </tr>
@@ -38,21 +38,21 @@ const ClassTimeTablePage = () => {
             <td>&nbsp;Angol</td>
             <td>&nbsp;Nyelvtan</td>
             <td>&nbsp;Testnevelés</td>
-            <td>&nbsp;Történelem</td>
+            <td>&nbsp;Osztályfőnöki</td>
             <td>&nbsp;Angol</td>
           </tr>
           <tr>
             <td>&nbsp;Matematika</td>
             <td>&nbsp;Etika</td>
             <td>&nbsp;Technika</td>
-            <td>&nbsp;Magyar irodalom</td>
+            <td>&nbsp;Angol</td>
             <td>&nbsp;Testnevelés</td>
           </tr>
           <tr>
             <td>&nbsp;Digitális oktatás</td>
-            <td>&nbsp;Természetismeret</td>
+            <td>&nbsp;Irodalom</td>
             <td>&nbsp;Matematika</td>
-            <td>&nbsp;Magyar nyelvtan</td>
+            <td>&nbsp;Történelem</td>
             <td>&nbsp;Rajz</td>
           </tr>
           <tr>
@@ -63,13 +63,15 @@ const ClassTimeTablePage = () => {
             <td>&nbsp;Ének</td>
           </tr>
           <tr>
-            <td>&nbsp;</td>
+            <td>&nbsp;Nyelvtan</td>
             <td>&nbsp;Testnevelés</td>
             <td>&nbsp;</td>
             <td>&nbsp;Testnevelés</td>
-            <td>&nbsp;Osztályfőnöki</td>
+            <td>&nbsp;</td>
           </tr>
         </tbody>
+
+        <tbody></tbody>
       </table>
     </div>
     <style>
@@ -78,7 +80,8 @@ const ClassTimeTablePage = () => {
       * {
         font-family: Roboto;
       }
-      table, td{
+      table,
+      td {
         border: 2px solid black;
         text-align: center;
       }
@@ -88,9 +91,10 @@ const ClassTimeTablePage = () => {
         align-items: center;
       }
     </style>
+
     `);
     timetable.document.close();
-    timetable.print();
+    if(ifPrint) timetable.print();
   };
   return (
     <div className="Timetable">
@@ -105,9 +109,15 @@ const ClassTimeTablePage = () => {
           <CardActions>
             <Button
               variant="outlined"
-              onClick={printClassTimetable}
+              onClick={() => printClassTimetable(true)}
             >
               Nyomtatás
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => printClassTimetable(false)}
+            >
+              Megtekintés
             </Button>
           </CardActions>
         </Card>
