@@ -54,3 +54,39 @@ code {
 img {
   width: fit-content;
 }
+
+hr {
+  border-style: solid;
+  border-width: 4px;
+  border-color: black;
+}
+
+hr:hover {
+  animation-duration: 9s;
+  animation-name: change-colors;
+  animation-iteration-count: infinite;
+}
+
+@keyframes change-colors {
+  0% {
+    border-color: red;
+  }
+  20% {
+    border-color: cyan;
+  }
+  40% {
+    border-color: darkgreen;
+  }
+  60% {
+    border-color: gold;
+  }
+  80% {
+    border-color: magenta;
+  }
+  90% {
+    border-color: navy;
+  }
+  100% {
+    border-color: red;
+  }
+}
