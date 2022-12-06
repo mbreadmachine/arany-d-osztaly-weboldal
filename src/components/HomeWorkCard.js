@@ -3,6 +3,7 @@ import { Typography, CardContent, CardHeader, Card } from "@mui/material";
 import { HomeWork } from "@mui/icons-material";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from 'rehype-raw'
 
 export const HomeWorkCard = (props) => {
   return (
@@ -22,7 +23,7 @@ export const HomeWorkCard = (props) => {
               //   __html: formatHomework(e.homework),
               // }}
             >
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm, rehypeRaw]}>
                 {e.homework}
               </ReactMarkdown>
             </Typography>
