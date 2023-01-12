@@ -52,7 +52,7 @@ code {
 }
 
 img {
-  width: 20%;
+  width: fit-content;
 }
 
 important {
