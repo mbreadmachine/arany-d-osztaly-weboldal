@@ -12,7 +12,7 @@ import {
   AppBar,
   Divider
 } from "@mui/material";
-import { Menu, Home, ViewTimeline, Payments } from "@mui/icons-material";
+import { Menu, Home, ViewTimeline, Payments, Launch } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export const NavBar = (props) => {
@@ -68,6 +68,17 @@ export const NavBar = (props) => {
               </ListItem>
             </Link>
           ))}
+          <Divider />
+          <a href="http://www.aranyj-gyor.edu.hu" target="_blank" className="link">
+              <ListItem disablePadding sx={{ width: "300px" }}>
+                <ListItemButton>
+                  <ListItemIcon color="primary" sx={{ color: "white" }}>
+                    <Launch />
+                  </ListItemIcon>
+                  <ListItemText primary="HIVATALOS weboldal" />
+                </ListItemButton>
+              </ListItem>
+            </a>
         </Box>
       </Drawer>
     </>
