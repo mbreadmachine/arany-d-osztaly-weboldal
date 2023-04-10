@@ -96,3 +96,18 @@ hr:hover {
     border-color: red;
   }
 }
+
+.container {
+  display: flex;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.column:first-child {
+  border-right: 1px solid black;
+}
+
