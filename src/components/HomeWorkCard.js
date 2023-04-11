@@ -100,7 +100,7 @@ export const HomeWorkCard = (props) => {
       </Dialog>
       {/* Dialog end */}
 
-      <Card sx={{ minWidth: 345, minHeight: 300 }}>
+      <Card sx={{ minWidth: 345, minHeight: 300, marginRight: "10px", marginLeft: "10px" }}>
         <CardHeader
           avatar={<HomeWork />}
           title="Házi feladat"
@@ -117,16 +117,17 @@ export const HomeWorkCard = (props) => {
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{hw}</ReactMarkdown>
           </Typography>
         </CardContent>
-        <CardActions>
+        <div style={{ "display": "flex", "justifyContent": "center" }}>
           <Button
             variant="outlined"
             startIcon={<PhotoLibrary />}
-            style={{ "width": "100%", "marginBottom": "50px" }}
+            style={{ "width": "90%", "marginBottom": "20px" }}
             onClick={() => setIsOpen(true)}
           >
             Csatolt képek
           </Button>
-        </CardActions>
+        </div>
+
       </Card>
     </>
   );
