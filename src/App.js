@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <NavBar title="Főoldal" />
       <br />
-
+      <marquee style={{"color": "orange"}}>FIGYELEM: Mostantól, az órai munka képei egy külön ablakban találhatóak. Ez az ablak megnyitható a házi feladat kártyája alján található gombbal.</marquee>
       <Grid container sx={{ mt: 2 }} spacing={2}>
         <Grid item xs={12} md={6}>
           <Typography variant="h4" align="center">
