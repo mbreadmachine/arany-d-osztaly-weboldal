@@ -121,7 +121,7 @@ export const HomeWorkCard = (props) => {
           <Button
             variant="outlined"
             startIcon={<PhotoLibrary />}
-            style={{ "width": "100%", "marginBottom": "20px" }}
+            style={{ "width": "100%", "marginBottom": "50px" }}
             onClick={() => setIsOpen(true)}
           >
             Csatolt képek
