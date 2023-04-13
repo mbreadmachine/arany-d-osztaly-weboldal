@@ -112,7 +112,7 @@ export const HomeWorkCard = (props) => {
         sx={{
           minWidth: 345,
           minHeight: 300,
-          maxWidth: "400px",
+          maxWidth: "390px",
           marginRight: "10px",
           marginLeft: "10px",
         }}
