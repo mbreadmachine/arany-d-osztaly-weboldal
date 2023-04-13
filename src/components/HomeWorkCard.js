@@ -57,45 +57,53 @@ export const HomeWorkCard = (props) => {
           style={{ backgroundColor: "#4661e7", color: "white" }}
         >
           {hwparms.date} napi házi feladat csatolmányai
-          <IconButton onClick={() => setIsOpen(false)} autoFocus style={{ color: "white" }}>
+          <IconButton
+            onClick={() => setIsOpen(false)}
+            autoFocus
+            style={{ color: "white" }}
+          >
             <Close />
           </IconButton>
         </DialogTitle>
         {/*pics.pictures && pics.pictures.map((pic) => <p>{pic}</p>)*/}
         <DialogContent style={{ backgroundColor: "#3c3c3c" }}>
-          <div style={{ "marginTop": "20px" }}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            justifyContent="center"
-          >
+          <div style={{ marginTop: "20px" }}>
+            <Grid
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              justifyContent="center"
+            >
               {pics.pictures &&
                 pics.pictures.map((pic) => (
                   <Grid item xs="auto">
                     <Card sx={{ minWidth: 275 }}>
-                      <CardContent>
-                        <img src={pic.split(":")[2]} />
-                        <Typography variant="subtitle1" fontWeight="bold">
-                          {pic.split(":")[0]}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Button
-                          variant="outlined"
-                          startIcon={<Visibility />}
-                          target="_blank"
-                          href={pic.split(":")[2]}
-                          style={{ width: "100%" }}
-                        >
-                          Megtekintés
-                        </Button>
-                      </CardActions>
+                      <div
+                        style={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <CardContent>
+                          <img src={pic.split(":")[2]} />
+                          <Typography variant="subtitle1" fontWeight="bold">
+                            {pic.split(":")[0]}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button
+                            variant="outlined"
+                            startIcon={<Visibility />}
+                            target="_blank"
+                            href={pic.split(":")[2]}
+                            style={{ width: "100%" }}
+                          >
+                            Megtekintés
+                          </Button>
+                        </CardActions>
+                      </div>
                     </Card>
                   </Grid>
                 ))}
-          </Grid>
-            </div>
+            </Grid>
+          </div>
         </DialogContent>
       </Dialog>
       {/* Dialog end */}
