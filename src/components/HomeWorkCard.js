@@ -79,7 +79,7 @@ export const HomeWorkCard = (props) => {
                   <Grid item xs="auto">
                     <Card sx={{ minWidth: 275 }}>
                       <div
-                        style={{ display: "flex", justifyContent: "center" }}
+                        style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}
                       >
                         <CardContent>
                           <img src={pic.split(":")[2]} />
