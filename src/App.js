@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <NavBar title="Főoldal" />
       <br />
-      <marquee style={{"color": "orange"}}>FIGYELEM: Minden hét hétfőn, az adatbázisból törlődnek a képek. Ezért, csak a jelenlegi héti órai munkákat lehet megtekinteni. Elnézést, ha kellemetlenséget okoztam.</marquee>
+      <marquee style={{"color": "orange"}}>FIGYELEM: Minden hét hétfőn, az adatbázisból törlődnek a képek. Ezért, csak a jelenlegi heti órai munkákat lehet megtekinteni. Elnézést, ha kellemetlenséget okoztam.</marquee>
       <Grid container sx={{ mt: 2 }} spacing={2}>
         <Grid item xs={12} md={6}>
           <Typography variant="h4" align="center">
