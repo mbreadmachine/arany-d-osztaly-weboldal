@@ -77,7 +77,7 @@ export const HomeWorkCard = (props) => {
               {pics.pictures &&
                 pics.pictures.map((pic) => (
                   <Grid item xs="auto">
-                    <Card sx={{ minWidth: 275 }}>
+                    <Card sx={{ width: "350px" }}>
                       <div
                         style={{ display: "flex", justifyContent: "center", flexDirection: "column" }}
                       >
