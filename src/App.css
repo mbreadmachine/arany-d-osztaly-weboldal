@@ -8,7 +8,7 @@ body {
   background-color: rgb(60, 60, 60);
 }
 
-.App, .Timetable, .ClassMoney {
+.App, .Timetable, .ClassMoney, .CreateHW {
   color: white;
   /* display: flex;
   flex-direction: column; */
