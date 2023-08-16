@@ -36,7 +36,7 @@ function App() {
       <Grid container sx={{ mt: 2 }} spacing={2}>
         <Grid item xs={12} md={6}>
           <Typography variant="h4" align="center">
-            Üdvözöllek az 5.d információs weboldalán!
+            Üdvözöllek az 6.d információs weboldalán!
           </Typography>
           <br />
           <Typography variant="h5" align="center">

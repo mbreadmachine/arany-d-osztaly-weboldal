@@ -12,7 +12,7 @@ import {
   AppBar,
   Divider
 } from "@mui/material";
-import { Menu, Home, ViewTimeline, Payments, Launch } from "@mui/icons-material";
+import { Menu, Home, ViewTimeline, Launch } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 export const NavBar = (props) => {
@@ -53,7 +53,7 @@ export const NavBar = (props) => {
         <Box
           sx={{ height: "100%", backgroundColor: accentColor, color: "white" }}
         >
-          <Typography variant="h6" align="center" sx={{ position: "relative", bottom: "-10px" }}>5.d Információs weboldal</Typography>
+          <Typography variant="h6" align="center" sx={{ position: "relative", bottom: "-10px" }}>6.d Információs weboldal</Typography>
           <br />
           <Divider />
           {pages.map((page) => (
