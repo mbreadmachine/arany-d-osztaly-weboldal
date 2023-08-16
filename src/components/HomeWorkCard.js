@@ -95,7 +95,7 @@ export const HomeWorkCard = (props) => {
                             href={pic.split(":")[2]}
                             style={{ width: "100%" }}
                           >
-                            Megtekintés
+                            Megtekintés nagyobban
                           </Button>
                         </CardActions>
                       </div>
