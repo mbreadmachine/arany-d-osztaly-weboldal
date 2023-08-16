@@ -12,7 +12,7 @@ import {
   CardActions,
   IconButton,
 } from "@mui/material";
-import { HomeWork, PhotoLibrary, Visibility, Close } from "@mui/icons-material";
+import { HomeWork, PhotoLibrary, OpenInFull, Close } from "@mui/icons-material";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -90,7 +90,7 @@ export const HomeWorkCard = (props) => {
                         <CardActions>
                           <Button
                             variant="outlined"
-                            startIcon={<Visibility />}
+                            startIcon={<OpenInFull />}
                             target="_blank"
                             href={pic.split(":")[2]}
                             style={{ width: "100%" }}
