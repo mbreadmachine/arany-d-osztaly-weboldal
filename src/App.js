@@ -4,6 +4,7 @@ import { NavBar } from "./components/NavBar";
 import React from "react";
 import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase";
+import { NewsBottomSheet } from "./components/NewsBottomSheet";
 
 function App() {
   const [datesHomework, setDatesHomework] = React.useState([]);
@@ -80,6 +81,7 @@ function App() {
           </Box>
         </Grid>
       </Grid>
+      <NewsBottomSheet></NewsBottomSheet>
     </div>
   );
 }
