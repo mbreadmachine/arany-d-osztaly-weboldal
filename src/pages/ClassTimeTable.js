@@ -45,7 +45,7 @@ const ClassTimeTablePage = () => {
             <Button
               variant="outlined"
               onClick={() =>
-                printClassTimetable(1, "1ebXMbQmNcboOkgJhdB1C3n7JUIwfg7JH")
+                printClassTimetable(1, process.env.REACT_APP_TIMETABLE_DRIVE_ID)
               }
             >
               Letöltés
@@ -53,7 +53,7 @@ const ClassTimeTablePage = () => {
             <Button
               variant="outlined"
               onClick={() =>
-                printClassTimetable(0, "1ebXMbQmNcboOkgJhdB1C3n7JUIwfg7JH")
+                printClassTimetable(0, process.env.REACT_APP_TIMETABLE_DRIVE_ID)
               }
             >
               Megtekintés
