@@ -140,7 +140,7 @@ export const HomeWorkCard = (props) => {
             style={{ width: "90%", marginBottom: "20px" }}
             onClick={() => setIsOpen(true)}
           >
-            Csatolt képek
+            Órai munka
           </Button>
         </div>
       </Card>
