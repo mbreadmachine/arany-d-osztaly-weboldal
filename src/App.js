@@ -81,7 +81,7 @@ function App() {
           </Box>
         </Grid>
       </Grid>
-      <NewsBottomSheet></NewsBottomSheet>
+      {/* <NewsBottomSheet></NewsBottomSheet> */}
     </div>
   );
 }
