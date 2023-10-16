@@ -79,6 +79,16 @@ export const NavBar = (props) => {
                 </ListItemButton>
               </ListItem>
             </a>
+            <Link to="/privacy" className="link">
+              <ListItem disablePadding sx={{ width: "300px" }}>
+                <ListItemButton>
+                  <ListItemIcon color="primary" sx={{ color: "white" }}>
+                    <Launch />
+                  </ListItemIcon>
+                  <ListItemText primary="Az adatvédelemről" />
+                </ListItemButton>
+              </ListItem>
+            </Link>
         </Box>
       </Drawer>
     </>

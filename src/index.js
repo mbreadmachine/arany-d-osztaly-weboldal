@@ -10,6 +10,7 @@ import ClassMoney from "./pages/ClassMoney"
 import CreateHW from './pages/CreateHW';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
 
 const darkTheme = createTheme({
   palette: {
@@ -33,6 +34,10 @@ const mainRouter = createBrowserRouter([
   {
     path: "/create",
     element: <CreateHW />,
+  },
+  {
+    path: "/privacy",
+    element: <PrivacyPolicy />
   }
 ])
 
