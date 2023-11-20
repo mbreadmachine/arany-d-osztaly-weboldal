@@ -9,7 +9,7 @@ body {
 }
 
 .App, .Timetable, .ClassMoney, .CreateHW, .PrivacyP {
-  color: white;
+  /* color: white; */
   /* display: flex;
   flex-direction: column; */
 

@@ -4,9 +4,8 @@ import { NavBar } from "./components/NavBar";
 import React from "react";
 import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase";
-import { NewsBottomSheet } from "./components/NewsBottomSheet";
 
-function App() {
+function Main() {
   const [datesHomework, setDatesHomework] = React.useState([]);
   const [date, setDate] = React.useState(new Date().toISOString().slice(0, 10));
 
@@ -86,4 +85,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;

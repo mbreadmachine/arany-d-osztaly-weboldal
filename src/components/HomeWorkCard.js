@@ -36,8 +36,6 @@ export const HomeWorkCard = (props) => {
           });
 
         setPics(lPics);
-
-        console.log(lPics, pics);
       } catch {
         console.log("nem lehetett de mindegy :)");
       }
