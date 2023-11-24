@@ -44,6 +44,7 @@ const CreateHW = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
+          autoComplete="current-password"
         />
         <Button
           startIcon={<LoginIcon />}
