@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, notification, Typography, Divider } from "antd";
+import { Button, Typography, Divider } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { App } from "antd";
