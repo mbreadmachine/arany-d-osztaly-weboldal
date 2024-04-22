@@ -1,3 +1,6 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "[svelte]": {
+        "editor.defaultFormatter": "svelte.svelte-vscode"
+    },
 }
