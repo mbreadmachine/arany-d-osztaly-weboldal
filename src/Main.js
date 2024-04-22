@@ -6,11 +6,21 @@ import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase";
 import { DatePicker, Spin } from "antd";
 import dayjs from "dayjs";
+import { useSearchParams } from "react-router-dom";
+import history from "history/browser";
 
 function Main() {
   const [datesHomework, setDatesHomework] = React.useState([]);
-  const [date, setDate] = React.useState(new Date().toISOString().slice(0, 10));
+  const [sparams, setSParams] = useSearchParams()
+  const [date, setDate] = React.useState(() => {
+    if (sparams.has("date") && dayjs(sparams.get("date")).isValid()) {
+      return sparams.get("date");
+    } else {
+      return new Date().toISOString().slice(0, 10)
+    }
+  });
   const [loading, setLoading] = React.useState(false)
+
 
   const getSetDatesHomework = async () => {
     setLoading(true)
@@ -30,6 +40,18 @@ function Main() {
     }
   };
 
+  const handleDateChange = (date) => {
+    history.push({ search: `?date=${date}` });
+    setDate(date);
+  };
+  React.useEffect(() => {
+    if (sparams.has("date") && dayjs(sparams.get("date")).isValid()) {
+      setDate(sparams.get("date"));
+    } else {
+      setDate(new Date().toISOString().slice(0, 10));
+    }
+  }, [sparams]);
+  
   React.useEffect(() => {
     getSetDatesHomework();
   }, [date]);
@@ -58,7 +80,7 @@ function Main() {
             <DatePicker
               style={{ width: 200, height: 30 }}
               value={dayjs(date)}
-              onChange={(date, dateString) => setDate(dateString)}
+              onChange={(date, dateString) => handleDateChange(dateString)}
               allowClear={false}
               size="large"
             ></DatePicker>

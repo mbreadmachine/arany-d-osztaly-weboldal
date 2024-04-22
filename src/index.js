@@ -51,8 +51,10 @@ root.render(
   <ConfigProvider locale={locale}>
     <React.StrictMode>
       <App>
-        <CssBaseline />
-        <RouterProvider router={mainRouter} />
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <RouterProvider router={mainRouter} />
+        </ThemeProvider>
       </App>
     </React.StrictMode>
   </ConfigProvider>
