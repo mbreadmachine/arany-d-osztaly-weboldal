@@ -46,6 +46,11 @@ export const NavBar = (props) => {
             >
               {props.title}
             </Typography>
+            <div>
+              {props.menuItems ? props.menuItems.map(element => {
+                return element
+              }) : null}
+            </div>
           </Toolbar>
         </AppBar>
       </Box>
