@@ -35,7 +35,9 @@ const useLogInUI = () => {
 
     if (md5(password).toString() === process.env.REACT_APP_CREATE_PASS_HASH) {
       if (rememberMe) {
-        setCookie("passwordHash", process.env.REACT_APP_CREATE_PASS_HASH);
+        let newDate = new Date();
+        newDate.setFullYear(newDate.getFullYear() + 1);
+        setCookie("passwordHash", process.env.REACT_APP_CREATE_PASS_HASH, {expires: newDate});
       }
       setIsLoggedIn(true);
     } else {
