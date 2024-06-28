@@ -15,10 +15,6 @@ body {
 
 }
 
-.PrivacyP > p, h1, h2 {
-  padding: 10px;
-}
-
 table, td{
   border: 2px solid black;
   text-align: center;
@@ -53,6 +49,7 @@ code {
   border: 1px black solid;
   border-radius: 5px;
   background-color: rgb(249, 249, 249);
+  color: black;
 }
 
 img {
@@ -60,45 +57,9 @@ img {
 }
 
 important {
-  color: black;
+  color: white;
   background-color: rgb(47, 255, 0);
   padding: 4px;
-}
-
-hr {
-  border-style: solid;
-  border-width: 4px;
-  border-color: black;
-}
-
-hr:hover {
-  animation-duration: 9s;
-  animation-name: change-colors;
-  animation-iteration-count: infinite;
-}
-
-@keyframes change-colors {
-  0% {
-    border-color: red;
-  }
-  20% {
-    border-color: cyan;
-  }
-  40% {
-    border-color: darkgreen;
-  }
-  60% {
-    border-color: gold;
-  }
-  80% {
-    border-color: magenta;
-  }
-  90% {
-    border-color: navy;
-  }
-  100% {
-    border-color: red;
-  }
 }
 
 .container {
@@ -119,8 +80,4 @@ hr:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-a {
-  color: white;
 }
