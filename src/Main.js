@@ -1,42 +1,42 @@
 import "./App.css";
-import { Typography, Box, Grid } from "@mui/material";
+import { Typography, Box, Grid, IconButton } from "@mui/material";
 import { NavBar } from "./components/NavBar";
 import React from "react";
 import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase";
 import { DatePicker, Spin } from "antd";
 import dayjs from "dayjs";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import history from "history/browser";
+import { Add } from "@mui/icons-material";
 
 function Main() {
   const [datesHomework, setDatesHomework] = React.useState([]);
-  const [sparams, setSParams] = useSearchParams()
+  const [sparams, setSParams] = useSearchParams();
   const [date, setDate] = React.useState(() => {
     if (sparams.has("date") && dayjs(sparams.get("date")).isValid()) {
       return sparams.get("date");
     } else {
-      return new Date().toISOString().slice(0, 10)
+      return new Date().toISOString().slice(0, 10);
     }
   });
-  const [loading, setLoading] = React.useState(false)
-
+  const [loading, setLoading] = React.useState(false);
 
   const getSetDatesHomework = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const { data, error } = await supabase
         .from("homework")
-        .select()
+        .select("*, user(*)")
         .eq("date", date);
       if (error) {
         throw error.message;
       }
       setDatesHomework(data);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       alert("hiba történt: " + err);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -51,14 +51,23 @@ function Main() {
       setDate(new Date().toISOString().slice(0, 10));
     }
   }, [sparams]);
-  
+
   React.useEffect(() => {
     getSetDatesHomework();
   }, [date]);
 
   return (
     <div className="App">
-      <NavBar title="Főoldal" />
+      <NavBar
+        title="Főoldal"
+        menuItems={[
+          <Link to="/create">
+            <IconButton>
+              <Add />
+            </IconButton>
+          </Link>,
+        ]}
+      />
       <br />
       {/* <marquee style={{"color": "orange"}}>FIGYELEM: Minden hét hétfőn, az adatbázisból törlődnek a képek. Ezért, csak a jelenlegi heti órai munkákat lehet megtekinteni. Elnézést, ha kellemetlenséget okoztam.</marquee> */}
       <Grid container sx={{ mt: 2 }} spacing={2}>
@@ -102,19 +111,22 @@ function Main() {
             }}
           >
             <Typography variant="h5" align="center">
-              A {date} dátumi házi feladat:
+              Házi feladat {date}-én/án:
             </Typography>
             <br />
-            {loading ? <Spin /> : 
-            datesHomework.length === 0 ? (
+            {loading ? (
+              <Spin />
+            ) : datesHomework.length === 0 ? (
               <Typography variant="subtitle">
                 Nincs erre a napra házi, válassz új napot.
               </Typography>
             ) : (
-              <HomeWorkCard data={datesHomework} isSingle={true} />
-            )
-            }
-
+              <div sx={{ display: "flex", flexDirection: "column" }}>
+                {datesHomework.map((homw) => (
+                  <HomeWorkCard data={homw} />
+                ))}
+              </div>
+            )}
           </Box>
         </Grid>
       </Grid>
