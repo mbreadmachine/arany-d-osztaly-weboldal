@@ -62,7 +62,7 @@ function Main() {
         title="Főoldal"
         menuItems={[
           <Link to="/create">
-            <IconButton>
+            <IconButton style={{ color: "white" }}>
               <Add />
             </IconButton>
           </Link>,

@@ -46,7 +46,7 @@ export const HomeWorkCard = (props) => {
           </IconButton>
         </DialogTitle>
         {/*pics.pictures && pics.pictures.map((pic) => <p>{pic}</p>)*/}
-        <DialogContent style={{ backgroundColor: "#3c3c3c" }}>
+        <DialogContent>
           <div style={{ marginTop: "20px" }}>
             <Grid
               container

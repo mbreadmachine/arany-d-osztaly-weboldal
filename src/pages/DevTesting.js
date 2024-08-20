@@ -3,6 +3,7 @@ import { Button, Typography, Divider } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { App } from "antd";
+import { MDXEditor, headingsPlugin } from "@mdxeditor/editor";
 
 export const DevTesting = () => {
     const { notification } = App.useApp();
@@ -29,6 +30,7 @@ export const DevTesting = () => {
       >
         Üzenet tesztelése
       </Button>
+      <MDXEditor markdown="" plugins={[headingsPlugin()]} />
     </div>
   );
 };

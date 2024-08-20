@@ -1,3 +1,5 @@
+import "@mdxeditor/editor/style.css";
+
 import React from "react";
 import { NavBar } from "../components/NavBar";
 import { Button, TextField, Grid, Typography } from "@mui/material";
@@ -6,6 +8,17 @@ import { v4 as uuidv4 } from "uuid";
 import { HomeWorkCard } from "../components/HomeWorkCard";
 import { supabase } from "../supabase";
 import { useLogInUI } from "../components/LoginWall";
+import {
+  MDXEditor,
+  headingsPlugin,
+  toolbarPlugin,
+  BlockTypeSelect,
+} from "@mdxeditor/editor";
+import { listsPlugin } from "@mdxeditor/editor";
+import { ListsToggle } from "@mdxeditor/editor";
+import { UndoRedo } from "@mdxeditor/editor";
+import i18n from "i18next";
+import { BoldItalicUnderlineToggles } from "@mdxeditor/editor";
 
 const CreateHW = () => {
   const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
@@ -52,24 +65,57 @@ const CreateHW = () => {
         <Grid container sx={{ mt: 2 }} spacing={2}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" textAlign="center">
-              Házi feladat adatok:
+              Add meg a dátumot, és kezdd el beírni a házikat alább!
             </Typography>
-            <input
-              type="date"
-              style={{ width: "100%", height: "30px", marginBottom: "1%" }}
-              value={homework.date}
-              onChange={(e) =>
-                setHomework({ ...homework, date: e.target.value })
-              }
-            />
-            <TextField
+
+            {/* <TextField
               multiline
               rows="20"
               fullWidth
               onChange={(e) =>
                 setHomework({ ...homework, homework: e.target.value })
               }
-            />
+            /> */}
+
+            <div
+              style={{
+                border: "2px solid black",
+                padding: "2px",
+                borderRadius: "10px",
+                paddingTop: "3px",
+                paddingBottom: "3px",
+              }}
+            >
+              <input
+                type="date"
+                value={homework.date}
+                onChange={(e) =>
+                  setHomework({ ...homework, date: e.target.value })
+                }
+                style={{ width: "100%", height: "30px" }}
+              />
+              <MDXEditor
+                markdown={homework.homework}
+                onChange={(value) =>
+                  setHomework({ ...homework, homework: value })
+                }
+                plugins={[
+                  headingsPlugin(),
+                  listsPlugin(),
+                  toolbarPlugin({
+                    toolbarContents: () => (
+                      <>
+                        <BlockTypeSelect />
+                        <ListsToggle />
+                        <UndoRedo />
+                        <BoldItalicUnderlineToggles />
+                      </>
+                    ),
+                  }),
+                ]}
+                translation={(key, defaultValue, interpolations) => { return i18n.t(key, defaultValue, interpolations) }}
+              />
+            </div>
             <Button
               variant="contained"
               startIcon={<SaveIcon />}
@@ -90,6 +136,9 @@ const CreateHW = () => {
               flexDirection: "column",
             }}
           >
+            <Typography variant="h5" align="center">
+              Teljesen működő előnézet:
+            </Typography>
             <HomeWorkCard data={homework} />
           </Grid>
         </Grid>
