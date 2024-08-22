@@ -1,14 +1,15 @@
 import "./App.css";
-import { Typography, Box, Grid, IconButton } from "@mui/material";
+import { Typography, Box, Grid, IconButton, CircularProgress } from "@mui/material";
 import { NavBar } from "./components/NavBar";
 import React from "react";
 import { HomeWorkCard } from "./components/HomeWorkCard";
 import { supabase } from "./supabase";
-import { DatePicker, Spin } from "antd";
 import dayjs from "dayjs";
 import { useSearchParams, Link } from "react-router-dom";
 import history from "history/browser";
 import { Add } from "@mui/icons-material";
+import { toast } from "react-hot-toast";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 function Main() {
   const [datesHomework, setDatesHomework] = React.useState([]);
@@ -35,7 +36,7 @@ function Main() {
       setDatesHomework(data);
       setLoading(false);
     } catch (err) {
-      alert("hiba történt: " + err);
+      toast.error("Hoppá, valami balul sült el. \n" + err);
       setLoading(false);
     }
   };
@@ -86,13 +87,7 @@ function Main() {
               alignItems: "center",
             }}
           >
-            <DatePicker
-              style={{ width: 200, height: 30 }}
-              value={dayjs(date)}
-              onChange={(date, dateString) => handleDateChange(dateString)}
-              allowClear={false}
-              size="large"
-            ></DatePicker>
+            <DatePicker label="Dátum" value={dayjs(date)} onChange={(newDate) => handleDateChange(newDate.toISOString().slice(0, 10))} sx={{ marginTop: "10px"}}/>
             {/* <input
               type="date"
               placeholder="Dátum"
@@ -115,7 +110,7 @@ function Main() {
             </Typography>
             <br />
             {loading ? (
-              <Spin />
+              <CircularProgress />
             ) : datesHomework.length === 0 ? (
               <Typography variant="subtitle">
                 Nincs erre a napra házi, válassz új napot.

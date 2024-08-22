@@ -19,6 +19,7 @@ import { ListsToggle } from "@mdxeditor/editor";
 import { UndoRedo } from "@mdxeditor/editor";
 import i18n from "i18next";
 import { BoldItalicUnderlineToggles } from "@mdxeditor/editor";
+import { toast } from "react-hot-toast";
 
 const CreateHW = () => {
   const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
@@ -50,13 +51,12 @@ const CreateHW = () => {
           user: homework.user.id,
         });
         if (error) throw error.message;
-        alert(
-          "Mentve! Az OK gomb megnyomása után visszairányítalak a főoldalra."
-        );
+        toast.success("Minden sikeresen mentve!");
+
         window.location.href = "/";
         return;
       } catch (err) {
-        alert(err);
+        toast.error("Hoppá, valami balul sült el. \n" + err);
       }
     };
 
