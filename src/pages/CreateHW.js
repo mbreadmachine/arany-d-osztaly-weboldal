@@ -20,6 +20,8 @@ import { UndoRedo } from "@mdxeditor/editor";
 import i18n from "i18next";
 import { BoldItalicUnderlineToggles } from "@mdxeditor/editor";
 import { toast } from "react-hot-toast";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 const CreateHW = () => {
   const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
@@ -67,16 +69,6 @@ const CreateHW = () => {
             <Typography variant="h5" textAlign="center">
               Add meg a dátumot, és kezdd el beírni a házikat alább!
             </Typography>
-
-            {/* <TextField
-              multiline
-              rows="20"
-              fullWidth
-              onChange={(e) =>
-                setHomework({ ...homework, homework: e.target.value })
-              }
-            /> */}
-
             <div
               style={{
                 border: "2px solid black",
@@ -86,13 +78,16 @@ const CreateHW = () => {
                 paddingBottom: "3px",
               }}
             >
-              <input
-                type="date"
-                value={homework.date}
-                onChange={(e) =>
-                  setHomework({ ...homework, date: e.target.value })
+              <DatePicker
+                label="Dátum"
+                value={dayjs(homework.date).set("hour", 12)}
+                onChange={(newDate) =>
+                  setHomework({
+                    ...homework,
+                    date: newDate.toISOString().slice(0, 10),
+                  })
                 }
-                style={{ width: "100%", height: "30px" }}
+                sx={{ marginTop: "10px", marginBottom: "10px" }}
               />
               <MDXEditor
                 markdown={homework.homework}
@@ -113,7 +108,9 @@ const CreateHW = () => {
                     ),
                   }),
                 ]}
-                translation={(key, defaultValue, interpolations) => { return i18n.t(key, defaultValue, interpolations) }}
+                translation={(key, defaultValue, interpolations) => {
+                  return i18n.t(key, defaultValue, interpolations);
+                }}
               />
             </div>
             <Button

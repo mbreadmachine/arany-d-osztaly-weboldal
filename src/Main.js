@@ -87,7 +87,7 @@ function Main() {
               alignItems: "center",
             }}
           >
-            <DatePicker label="Dátum" value={dayjs(date)} onChange={(newDate) => handleDateChange(newDate.toISOString().slice(0, 10))} sx={{ marginTop: "10px"}}/>
+            <DatePicker label="Dátum" value={dayjs(date).set("hour", 12)} onChange={(newDate) => handleDateChange(newDate.toISOString().slice(0, 10))} sx={{ marginTop: "10px"}}/>
             {/* <input
               type="date"
               placeholder="Dátum"
