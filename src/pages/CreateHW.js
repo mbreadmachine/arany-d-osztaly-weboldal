@@ -2,8 +2,18 @@ import "@mdxeditor/editor/style.css";
 
 import React from "react";
 import { NavBar } from "../components/NavBar";
-import { Button, TextField, Grid, Typography } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
+import {
+  Button,
+  Grid,
+  Typography,
+  Dialog,
+  AppBar,
+  Toolbar,
+  DialogTitle,
+  IconButton,
+  DialogContent,
+} from "@mui/material";
+import { Save, Edit, Close } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { HomeWorkCard } from "../components/HomeWorkCard";
 import { supabase } from "../supabase";
@@ -22,9 +32,31 @@ import { BoldItalicUnderlineToggles } from "@mdxeditor/editor";
 import { toast } from "react-hot-toast";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import useFileUpload from "../components/FileUpload";
 
 const CreateHW = () => {
   const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
+  const [fileUploadComponent, files, fileLabels] = useFileUpload();
+
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => setOpen(false);
+
+  const FileUploadDialog = () => {
+    return (
+      <div>
+        <DialogTitle className="dialogTitle" style={{ backgroundColor: "#4661e7", color: "white" }}>
+            <Typography variant="h6">Órai hozzáadása/szerkesztése</Typography>
+            <IconButton onClick={handleClose} style={{ color: "white" }}>
+              <Close />
+            </IconButton>
+        </DialogTitle>
+        <DialogContent>
+          <Typography variant="h6">Alul kéne lennie az upload componentnek!</Typography>
+          {fileUploadComponent()}
+        </DialogContent>
+      </div>
+    );
+  };
 
   const CreateUI = () => {
     const [nowDate, setNowDate] = React.useState(
@@ -64,6 +96,12 @@ const CreateHW = () => {
 
     return (
       <div>
+        <Dialog open={open} fullScreen>
+          <FileUploadDialog />
+        </Dialog>
+
+        {/* Ez ide nagyon de nagyon muszály ez a whitespace */}
+
         <Grid container sx={{ mt: 2 }} spacing={2}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" textAlign="center">
@@ -113,15 +151,32 @@ const CreateHW = () => {
                 }}
               />
             </div>
-            <Button
-              variant="contained"
-              startIcon={<SaveIcon />}
-              style={{ marginTop: "1%" }}
-              fullWidth
-              onClick={saveHW}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                gap: "50px",
+                marginTop: "1%",
+              }}
             >
-              Mentés
-            </Button>
+              <Button
+                variant="outlined"
+                startIcon={<Edit />}
+                fullWidth
+                onClick={() => setOpen(true)}
+              >
+                Órai hozzáadása/szerkesztése
+              </Button>
+              <Button
+                variant="contained"
+                startIcon={<Save />}
+                fullWidth
+                onClick={saveHW}
+              >
+                Mentés
+              </Button>
+            </div>
           </Grid>
           <Grid
             item
