@@ -50,8 +50,7 @@ const CreateHW = () => {
               <Close />
             </IconButton>
         </DialogTitle>
-        <DialogContent>
-          <Typography variant="h6">Alul kéne lennie az upload componentnek!</Typography>
+        <DialogContent style={{ marginTop: "10px" }}>
           {fileUploadComponent()}
         </DialogContent>
       </div>
