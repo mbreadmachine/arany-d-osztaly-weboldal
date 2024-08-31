@@ -41,6 +41,7 @@ const CreateHW = () => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
 
+
   const FileUploadDialog = () => {
     return (
       <div>
@@ -73,6 +74,19 @@ const CreateHW = () => {
           ? currentUser
           : { name: "Névtelen felhasználó", id: uuidv4() },
     });
+
+    React.useEffect(() => {
+      let newOrai = []
+
+      files.forEach((file, index) => {
+        newOrai.push({
+          title: fileLabels[index],
+          imgurl: file.url,
+        })
+      })
+
+      setHomework({...homework, orai: newOrai})
+    }, [files])
 
     const saveHW = async () => {
       try {

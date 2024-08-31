@@ -12,9 +12,14 @@ table, td{
   text-align: center;
 }
 
-.link {
+.sidebarlink {
   text-decoration: none;
-  color: white
+  color: white !important
+}
+
+a {
+  text-decoration: none;
+  color: rgb(65	132	207)
 }
 
 .ClassMoney {

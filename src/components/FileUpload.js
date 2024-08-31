@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Typography, IconButton, Tooltip } from "@mui/material";
-import { CloudUpload, Edit } from "@mui/icons-material";
+import { CloudUpload, Edit, DeleteForever } from "@mui/icons-material";
 
 const useFileUpload = () => {
   const [files, setFiles] = React.useState([]);
@@ -23,6 +23,13 @@ const useFileUpload = () => {
       `${fileLabels[index]} kép átnevezése`,
       fileLabels[index]
     );
+    if (
+      newFileName == null ||
+      newFileName === "" ||
+      newFileName === fileLabels[index]
+    ) {
+      return;
+    }
     setFileLabels([
       ...fileLabels.slice(0, index),
       newFileName,
@@ -30,9 +37,22 @@ const useFileUpload = () => {
     ]);
   };
 
+  const deleteFile = (index) => {
+    setFiles(files.filter((_, i) => i !== index));
+    setFileLabels(fileLabels.filter((_, i) => i !== index));
+  };
+
   const fileUploadComponent = () => (
     <div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center", textAlign: "center" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "10px",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
         <input
           type="file"
           multiple
@@ -49,7 +69,9 @@ const useFileUpload = () => {
         >
           Válassz ki képeket.
         </Button>
-        <Typography variant="h6"><i>Csak képek. JPG, JPEG és PNG elfogadott.</i></Typography>
+        <Typography variant="h6">
+          <i>Csak képek. JPG, JPEG és PNG elfogadott.</i>
+        </Typography>
       </div>
 
       {files && files.length === 0 ? (
@@ -60,23 +82,79 @@ const useFileUpload = () => {
       ) : (
         <></>
       )}
-      {files.map((file, index) => (
-        <div key={index}>
-          <p>
-            {fileLabels[index]}, {index}
-          </p>
-          <img
-            src={file.url}
-            alt={fileLabels[index]}
-            // style={{ width: "100px", height: "100px", aspectRatio: "16/9" }}
-          />
-          <Tooltip title="Szerkesztés">
-            <IconButton onClick={() => renameFile(index)}>
-              <Edit />
-            </IconButton>
-          </Tooltip>
-        </div>
-      ))}
+      {/* you are now entering the chatgpt zone! danke schon! */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "20px",
+          alignItems: "center",
+          marginTop: "50px",
+          width: "90%",
+          margin: "0 auto",
+          textWrap: "wrap",
+        }}
+      >
+        {files.map((file, index) => (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              backgroundColor: "#f0f0f0",
+              padding: "20px",
+              borderRadius: "10px",
+              width: "100%",
+              maxWidth: "100%",
+              boxSizing: "border-box",
+            }}
+            key={index}
+          >
+            <img
+              src={file.url}
+              alt={file.name}
+              style={{
+                width: "100px",
+                height: "100px",
+                objectFit: "cover",
+                borderRadius: "10px",
+              }}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                marginLeft: "10px",
+                flex: 1,
+              }}
+            >
+              <Typography variant="h5">{fileLabels[index]}</Typography>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "10px",
+                  marginTop: "10px",
+                }}
+              >
+                <Tooltip title="Szerkesztés">
+                  <IconButton onClick={() => renameFile(index)}>
+                    <Edit />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Törlés" onClick={() => deleteFile(index)}>
+                  <IconButton>
+                    <DeleteForever />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 

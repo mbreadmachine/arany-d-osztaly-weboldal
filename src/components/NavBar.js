@@ -62,7 +62,7 @@ export const NavBar = (props) => {
           <br />
           <Divider />
           {pages.map((page) => (
-            <Link to={page.path} className="link">
+            <Link to={page.path} className="sidebarlink">
               <ListItem key={page.index} disablePadding sx={{ width: "300px" }}>
                 <ListItemButton>
                   <ListItemIcon color="primary" sx={{ color: "white" }}>
@@ -74,7 +74,7 @@ export const NavBar = (props) => {
             </Link>
           ))}
           <Divider />
-          <a href="http://www.aranyj-gyor.edu.hu" target="_blank" className="link">
+          <a href="http://www.aranyj-gyor.edu.hu" target="_blank" className="sidebarlink">
               <ListItem disablePadding sx={{ width: "300px" }}>
                 <ListItemButton>
                   <ListItemIcon color="primary" sx={{ color: "white" }}>
@@ -84,16 +84,6 @@ export const NavBar = (props) => {
                 </ListItemButton>
               </ListItem>
             </a>
-            <Link to="/privacy" className="link">
-              <ListItem disablePadding sx={{ width: "300px" }}>
-                <ListItemButton>
-                  <ListItemIcon color="primary" sx={{ color: "white" }}>
-                    <Launch />
-                  </ListItemIcon>
-                  <ListItemText primary="Az adatvédelemről" />
-                </ListItemButton>
-              </ListItem>
-            </Link>
         </Box>
       </Drawer>
     </>
