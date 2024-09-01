@@ -31,6 +31,7 @@ import { toast } from "react-hot-toast";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import useFileUpload from "../components/FileUpload";
+import axios from "axios";
 
 
 const DialogIsolation = (props) => {
@@ -116,15 +117,6 @@ const CreateHW = () => {
             .upload(currentPath, file);
           if (uploadError) throw uploadError.message;
 
-          // Retrieve public URL for the uploaded file
-          // const {
-          //   data: { publicUrl },
-          //   error: urlError,
-          // } = supabase.storage.from("images").getPublicUrl(currentPath);
-          // if (urlError) throw urlError.message;
-
-          // if (publicUrl === null || publicUrl === undefined || publicUrl === "")
-          //   throw new Error("Hiba történt a feltöltés során. (publicURL üres volt a feltöltés után)\nEz azt jelenti, hogy a kép nem töltött fel rendesen.")
           let publicUrl =
             "https://jmuffvghssebyxkfujia.supabase.co/storage/v1/object/public/images/" +
             currentPath;
@@ -144,7 +136,22 @@ const CreateHW = () => {
         });
         if (dbError) throw dbError.message;
 
-        toast.success("Minden sikeresen mentve!");
+        axios.post("https://ntfy.sh/aranyd-teszt", `
+          ${homework.user.name} kirakta a ${homework.date} házit!
+          Nyomj az értesítésre a házi feladat megtekintéséhez!
+          Adatok:
+            - ${files.length}db órai van
+            - ${homework.homework.split("\n").length}db sor van
+        `, {
+          headers: {
+            "Click": "https://aranyd.vercel.app/?date=" + homework.date,
+            "Tags": "white_check_mark",
+          }
+        })
+        .then(res => toast.success("Értesítés elküldve!"))
+        .catch(err => toast.error("Hiba történt az értesítés küldésekor, viszont minden más sikeres.: " + err));
+
+        toast.success("Minden kész.");
 
         // Redirect and stop loading
         window.location.href = "/";
