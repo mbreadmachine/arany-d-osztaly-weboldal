@@ -7,8 +7,6 @@ import {
   Grid,
   Typography,
   Dialog,
-  AppBar,
-  Toolbar,
   DialogTitle,
   IconButton,
   DialogContent,
@@ -34,34 +32,40 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import useFileUpload from "../components/FileUpload";
 
-const CreateHW = () => {
-  const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
-  const [fileUploadComponent, files, fileLabels] = useFileUpload();
 
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
+const DialogIsolation = (props) => {
+  const handleClose = () => props.setOpen(false);
 
-
-  const FileUploadDialog = () => {
-    return (
-      <div>
-        <DialogTitle className="dialogTitle" style={{ backgroundColor: "#4661e7", color: "white" }}>
-            <Typography variant="h6">Órai hozzáadása/szerkesztése</Typography>
-            <IconButton onClick={handleClose} style={{ color: "white" }}>
-              <Close />
-            </IconButton>
+  return (
+    <>
+      <Dialog open={props.open} fullScreen>
+        <DialogTitle
+          className="dialogTitle"
+          style={{ backgroundColor: "#4661e7", color: "white" }}
+        >
+          <Typography variant="h6">Órai hozzáadása/szerkesztése</Typography>
+          <IconButton onClick={handleClose} style={{ color: "white" }}>
+            <Close />
+          </IconButton>
         </DialogTitle>
         <DialogContent style={{ marginTop: "10px" }}>
-          {fileUploadComponent()}
+          {props.fileUploadComponent()}
         </DialogContent>
-      </div>
-    );
-  };
+      </Dialog>
+    </>
+  );
+};
+
+const CreateHW = () => {
+  const [isLoggedIn, forgetMe, LogInUI, currentUser] = useLogInUI();
 
   const CreateUI = () => {
+    const [fileUploadComponent, files, fileLabels, blobURLs] = useFileUpload();
+    const [isLoading, setIsLoading] = React.useState(false);
     const [nowDate, setNowDate] = React.useState(
       new Date().toISOString().slice(0, 10)
     );
+    const [open, setOpen] = React.useState(false);
 
     const [homework, setHomework] = React.useState({
       id: uuidv4(),
@@ -76,43 +80,84 @@ const CreateHW = () => {
     });
 
     React.useEffect(() => {
-      let newOrai = []
-
+      console.log("updating órai")
+      let newOrai = [];
       files.forEach((file, index) => {
         newOrai.push({
           title: fileLabels[index],
-          imgurl: file.url,
-        })
-      })
+          imgurl: blobURLs[index],
+        });
+      });
+      setHomework({ ...homework, orai: newOrai });
+    }, [files, fileLabels]);
 
-      setHomework({...homework, orai: newOrai})
-    }, [files])
+    const handleUpdate = (v) => {
+      setHomework({ ...homework, homework: v });
+    };
 
-    const saveHW = async () => {
+    // * This is the upload mechanism
+    const uploadHW = async () => {
+      setIsLoading(true);
+
+      let uploadedFiles = [];
+
       try {
-        const { error } = await supabase.from("homework").insert({
+        for (let index = 0; index < files.length; index++) {
+          const file = files[index];
+
+          // Generate the new file name
+          let newFileName = uuidv4().replace("-", "");
+
+          let currentPath = `${homework.date}/${newFileName}`;
+
+          // Upload file using Supabase storage
+          const { error: uploadError } = await supabase.storage
+            .from("images")
+            .upload(currentPath, file);
+          if (uploadError) throw uploadError.message;
+
+          // Retrieve public URL for the uploaded file
+          // const {
+          //   data: { publicUrl },
+          //   error: urlError,
+          // } = supabase.storage.from("images").getPublicUrl(currentPath);
+          // if (urlError) throw urlError.message;
+
+          // if (publicUrl === null || publicUrl === undefined || publicUrl === "")
+          //   throw new Error("Hiba történt a feltöltés során. (publicURL üres volt a feltöltés után)\nEz azt jelenti, hogy a kép nem töltött fel rendesen.")
+          let publicUrl =
+            "https://jmuffvghssebyxkfujia.supabase.co/storage/v1/object/public/images/" +
+            currentPath;
+
+          // Store uploaded file info
+          uploadedFiles.push({ title: fileLabels[index], imgurl: publicUrl });
+          toast.success(`${file.name} feltöltve!`);
+        }
+
+        // Insert uploaded files metadata into the database
+        const { error: dbError } = await supabase.from("homework").insert({
           id: homework.id,
           date: homework.date,
           homework: homework.homework,
-          orai: homework.orai,
+          orai: uploadedFiles,
           user: homework.user.id,
         });
-        if (error) throw error.message;
+        if (dbError) throw dbError.message;
+
         toast.success("Minden sikeresen mentve!");
 
+        // Redirect and stop loading
         window.location.href = "/";
-        return;
+        setIsLoading(false);
       } catch (err) {
         toast.error("Hoppá, valami balul sült el. \n" + err);
+        setIsLoading(false);
       }
     };
 
     return (
-      <div>
-        <Dialog open={open} fullScreen>
-          <FileUploadDialog />
-        </Dialog>
-
+      <>
+        <DialogIsolation open={open} setOpen={setOpen} fileUploadComponent={fileUploadComponent} />
         {/* Ez ide nagyon de nagyon muszály ez a whitespace */}
 
         <Grid container sx={{ mt: 2 }} spacing={2}>
@@ -139,12 +184,11 @@ const CreateHW = () => {
                   })
                 }
                 sx={{ marginTop: "10px", marginBottom: "10px" }}
+                disabled={isLoading}
               />
               <MDXEditor
                 markdown={homework.homework}
-                onChange={(value) =>
-                  setHomework({ ...homework, homework: value })
-                }
+                onChange={handleUpdate}
                 plugins={[
                   headingsPlugin(),
                   listsPlugin(),
@@ -178,6 +222,7 @@ const CreateHW = () => {
                 startIcon={<Edit />}
                 fullWidth
                 onClick={() => setOpen(true)}
+                disabled={isLoading}
               >
                 Órai hozzáadása/szerkesztése
               </Button>
@@ -185,7 +230,8 @@ const CreateHW = () => {
                 variant="contained"
                 startIcon={<Save />}
                 fullWidth
-                onClick={saveHW}
+                onClick={uploadHW}
+                disabled={isLoading}
               >
                 Mentés
               </Button>
@@ -207,7 +253,7 @@ const CreateHW = () => {
             <HomeWorkCard data={homework} />
           </Grid>
         </Grid>
-      </div>
+      </>
     );
   };
 

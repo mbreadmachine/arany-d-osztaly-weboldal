@@ -5,12 +5,13 @@ import { CloudUpload, Edit, DeleteForever } from "@mui/icons-material";
 const useFileUpload = () => {
   const [files, setFiles] = React.useState([]);
   const [fileLabels, setFileLabels] = React.useState([]);
+  const [blobURLs, setBlobURLs] = React.useState([]);
   const uploader = React.useRef(null);
 
   const handleFileSelect = (event) => {
     let customFiles = Array.from(event.target.files);
     customFiles.forEach((v) => {
-      v.url = URL.createObjectURL(v);
+      blobURLs.push(URL.createObjectURL(v));
     });
     const updatedFiles = [...files, ...customFiles];
     setFiles(updatedFiles);
@@ -40,6 +41,7 @@ const useFileUpload = () => {
   const deleteFile = (index) => {
     setFiles(files.filter((_, i) => i !== index));
     setFileLabels(fileLabels.filter((_, i) => i !== index));
+    setBlobURLs(blobURLs.filter((_, i) => i !== index));
   };
 
   const fileUploadComponent = () => (
@@ -82,7 +84,6 @@ const useFileUpload = () => {
       ) : (
         <></>
       )}
-      {/* you are now entering the chatgpt zone! danke schon! */}
       <div
         style={{
           display: "flex",
@@ -112,7 +113,7 @@ const useFileUpload = () => {
             key={index}
           >
             <img
-              src={file.url}
+              src={blobURLs[index]}
               alt={file.name}
               style={{
                 width: "100px",
@@ -158,7 +159,7 @@ const useFileUpload = () => {
     </div>
   );
 
-  return [fileUploadComponent, files, fileLabels];
+  return [fileUploadComponent, files, fileLabels, blobURLs];
 };
 
 export default useFileUpload;
