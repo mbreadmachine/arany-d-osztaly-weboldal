@@ -26,7 +26,7 @@ const ClassTimeTablePage = () => {
             <Button
               variant="outlined"
             >
-              <a href="https://smart-timetable.app/share.html?code=U99R54ZN">Interaktív verzió</a>
+              <a href="https://smart-timetable.app/share.html?code=591Z2D86">Interaktív verzió</a>
             </Button>
             <Button
               variant="outlined"
