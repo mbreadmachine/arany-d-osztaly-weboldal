@@ -8,7 +8,6 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { UnderConstruction } from "../components/UnderConstruction";
 
 const ClassTimeTablePage = () => {
   return (
