@@ -141,7 +141,7 @@ const useFileUpload = () => {
                   marginTop: "10px",
                 }}
               >
-                <Tooltip title="Szerkesztés">
+                <Tooltip title="Átnevezés">
                   <IconButton onClick={() => renameFile(index)}>
                     <Edit />
                   </IconButton>
