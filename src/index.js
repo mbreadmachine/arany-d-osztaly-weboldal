@@ -13,6 +13,7 @@ import { useTranslation, initReactI18next } from "react-i18next";
 import { Toaster } from "react-hot-toast";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import * as Sentry from "@sentry/react";
 import "dayjs/locale/hu";
 import "@mdxeditor/editor/style.css";
 
@@ -44,6 +45,18 @@ const mainRouter = createBrowserRouter([
     element: <DevTesting />,
   },
 ]);
+
+Sentry.init({
+  dsn: "https://845c708beb971ee233d03afa6dfc1a5a@o4507892479033344.ingest.de.sentry.io/4507892685537360",
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration(),
+  ],
+  tracesSampleRate: 1.0,
+  tracePropagationTargets: ["localhost", "https://aranyd.vercel.app"],
+  replaysSessionSampleRate: 0.1,
+  replaysOnErrorSampleRate: 1.0,
+});
 
 i18n.use(initReactI18next).init({
   resources: {

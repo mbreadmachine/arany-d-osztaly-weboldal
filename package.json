@@ -10,6 +10,8 @@
     "@mui/lab": "^5.0.0-alpha.104",
     "@mui/material": "^5.10.4",
     "@mui/x-date-pickers": "^7.13.0",
+    "@sentry/cli": "^2.34.1",
+    "@sentry/react": "^8.28.0",
     "@supabase/supabase-js": "^1.35.7",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^13.4.0",
@@ -38,7 +40,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kraszni-marcell --project aranyd-vercel-app ./build && sentry-cli sourcemaps upload --org kraszni-marcell --project aranyd-vercel-app ./build"
   },
   "eslintConfig": {
     "extends": [
