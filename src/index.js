@@ -50,7 +50,10 @@ Sentry.init({
   dsn: "https://845c708beb971ee233d03afa6dfc1a5a@o4507892479033344.ingest.de.sentry.io/4507892685537360",
   integrations: [
     Sentry.browserTracingIntegration(),
-    Sentry.replayIntegration(),
+    Sentry.replayIntegration({
+      maskAllText: false,
+      blockAllMedia: false
+    }),
   ],
   tracesSampleRate: 1.0,
   tracePropagationTargets: ["localhost", "https://aranyd.vercel.app"],
