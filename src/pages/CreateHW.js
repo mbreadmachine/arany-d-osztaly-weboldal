@@ -137,7 +137,7 @@ const CreateHW = () => {
         });
         if (dbError) throw dbError.message;
 
-        const response = await fetch("https://ntfy.sh/aranyd-teszt", {
+        const response = await fetch("https://ntfy.sh/aranyd-hazi-ertesites", {
           method: "POST",
           
           headers: {
