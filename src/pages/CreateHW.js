@@ -31,8 +31,8 @@ import { toast } from "react-hot-toast";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import useFileUpload from "../components/FileUpload";
-import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import encodeyBeGoodHeaderStuff from "../libs/encodeyBeGoodHeaderStuff";
 
 const DialogIsolation = (props) => {
   const handleClose = () => props.setOpen(false);
@@ -62,6 +62,7 @@ const CreateHW = () => {
 
   const CreateUI = () => {
     const [fileUploadComponent, files, fileLabels, blobURLs] = useFileUpload();
+    const navigate = useNavigate();
     const [isLoading, setIsLoading] = React.useState(false);
     const [nowDate, setNowDate] = React.useState(
       new Date().toISOString().slice(0, 10)
@@ -136,25 +137,28 @@ const CreateHW = () => {
         });
         if (dbError) throw dbError.message;
 
-        axios.post("https://ntfy.sh/aranyd-teszt", `
-          ${homework.user.name} kirakta a ${homework.date} házit!
-          Nyomj az értesítésre a házi feladat megtekintéséhez!
-          Adatok:
-            - ${files.length}db órai van
-            - ${homework.homework.split("\n").length}db sor van
-        `, {
+        const response = await fetch("https://ntfy.sh/aranyd-teszt", {
+          method: "POST",
+          
           headers: {
             "Click": "https://aranyd.vercel.app/?date=" + homework.date,
             "Tags": "white_check_mark",
-          }
+            "Title": encodeyBeGoodHeaderStuff("A házi ki lett rakva!")
+          },
+          body: `
+          ${homework.user.name} kirakta a ${homework.date}-i házit
+          Nyomj az értesítésre a házi feladat megtekintéséhez!
+          Adatok:
+            - Első sor: ${homework.homework}
+          `
         })
-        .then(res => toast.success("Értesítés elküldve!"))
-        .catch(err => toast.error("Hiba történt az értesítés küldésekor, viszont minden más sikeres.: " + err));
+        if (!response.ok) toast.error("Hiba történt az értesítés küldésekor, viszont minden más sikeres.: " + response.statusText);
+        else toast.success("Értesítés elküldve!")
 
         toast.success("Minden kész.");
 
         // Redirect and stop loading
-        window.location.href = "/";
+        navigate("/");
         setIsLoading(false);
       } catch (err) {
         toast.error("Hoppá, valami balul sült el. \n" + err);
@@ -184,7 +188,7 @@ const CreateHW = () => {
               <DatePicker
                 label="Dátum"
                 value={dayjs(homework.date).set("hour", 12)}
-                onChange={(newDate) =>
+                onChange={(newDate) => 
                   setHomework({
                     ...homework,
                     date: newDate.toISOString().slice(0, 10),
