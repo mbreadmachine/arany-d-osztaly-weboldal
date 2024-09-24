@@ -97,6 +97,11 @@ const CreateHW = () => {
       setHomework({ ...homework, homework: v });
     };
 
+    const handleSaveClick = () => {
+      let confirmed = window.confirm("Amit ide lentre írtál, az el lesz mentve. Ezen nem változtathatsz az OK gomb megnyomása után. Oké?");
+      if (confirmed) uploadHW();
+    }
+
     // * This is the upload mechanism
     const uploadHW = async () => {
       setIsLoading(true);
@@ -241,7 +246,7 @@ const CreateHW = () => {
                 variant="contained"
                 startIcon={<Save />}
                 fullWidth
-                onClick={uploadHW}
+                onClick={handleSaveClick}
                 disabled={isLoading}
               >
                 Mentés
