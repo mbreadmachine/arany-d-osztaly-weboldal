@@ -98,6 +98,10 @@ const CreateHW = () => {
     };
 
     const handleSaveClick = () => {
+      if (!homework.homework || homework.homework == "") {
+        alert("Üres házit nehéz lesz kirakni. Írj be valamit!")
+        return
+      }
       let confirmed = window.confirm("Amit ide lentre írtál, az el lesz mentve. Ezen nem változtathatsz az OK gomb megnyomása után. Oké?");
       if (confirmed) uploadHW();
     }
