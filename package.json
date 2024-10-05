@@ -6,7 +6,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
-    "@mdxeditor/editor": "^3.11.0",
+    "@mdxeditor/editor": "^3.11.4",
     "@mui/icons-material": "^5.16.7",
     "@mui/lab": "^5.0.0-alpha.104",
     "@mui/material": "^5.10.4",
