@@ -33,6 +33,9 @@ import dayjs from "dayjs";
 import useFileUpload from "../components/FileUpload";
 import { useNavigate } from "react-router-dom";
 import encodeyBeGoodHeaderStuff from "../libs/encodeyBeGoodHeaderStuff";
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+
+dayjs.extend(weekOfYear)
 
 const DialogIsolation = (props) => {
   const handleClose = () => props.setOpen(false);
@@ -115,7 +118,7 @@ const CreateHW = () => {
           // Generate the new file name
           let newFileName = uuidv4().replace("-", "");
 
-          let currentPath = `${homework.date}/${newFileName}`;
+          let currentPath = `${new Date(homework.date).getFullYear()}-w${dayjs(homework.date).week()}/${homework.date}/${newFileName}`;
 
           // Upload file using Supabase storage
           const { error: uploadError } = await supabase.storage
