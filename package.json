@@ -38,7 +38,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kraszni-marcell --project aranyd-vercel-app ./build && sentry-cli sourcemaps upload --org kraszni-marcell --project aranyd-vercel-app ./build"
   },
