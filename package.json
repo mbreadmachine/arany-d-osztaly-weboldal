@@ -16,6 +16,7 @@
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vitejs/plugin-react": "^4.3.2",
     "crypto-js": "^4.1.1",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.13",
@@ -30,16 +31,15 @@
     "react-markdown": "^8.0.7",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
-    "react-scripts": "^5.0.1",
     "remark-gfm": "^3.0.1",
     "uuid": "^9.0.1",
+    "vite": "^5.4.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org kraszni-marcell --project aranyd-vercel-app ./build && sentry-cli sourcemaps upload --org kraszni-marcell --project aranyd-vercel-app ./build"
   },
   "eslintConfig": {
