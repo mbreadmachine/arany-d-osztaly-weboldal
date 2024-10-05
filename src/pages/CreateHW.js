@@ -85,7 +85,6 @@ const CreateHW = () => {
     });
 
     React.useEffect(() => {
-      console.log("updating órai")
       let newOrai = [];
       files.forEach((file, index) => {
         newOrai.push({
