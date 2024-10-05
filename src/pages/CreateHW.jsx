@@ -85,7 +85,6 @@ const CreateHW = () => {
     });
 
     React.useEffect(() => {
-      console.log("updating órai")
       let newOrai = [];
       files.forEach((file, index) => {
         newOrai.push({
@@ -149,7 +148,7 @@ const CreateHW = () => {
         });
         if (dbError) throw dbError.message;
 
-        const response = await fetch("https://ntfy.sh/aranyd-hazi-ertesites", {
+        const response = await fetch(import.meta.env.VITE_NTFY_URL, {
           method: "POST",
           
           headers: {
