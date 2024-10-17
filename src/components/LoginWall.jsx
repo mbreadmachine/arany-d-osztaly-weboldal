@@ -15,8 +15,6 @@ import { toast } from "react-hot-toast";
 
 const useLogInUI = () => {
   let [isLoggedIn, setIsLoggedIn] = React.useState(false);
-  let [rememberMe, setRememberMe] = React.useState(true);
-  let [password, setPassword] = React.useState("");
   let [cookies, setCookie, removeCookie] = useCookies();
   let [currentUser, setCurrentUser] = React.useState(null);
 
@@ -52,6 +50,10 @@ const useLogInUI = () => {
 
   const checkPassword = async (event) => {
     event.preventDefault();
+
+    const password = event.target[0].value
+    const rememberMe = event.target[2].checked;
+
     if (password === "") {
       toast.error("Be is kéne valamit írni, tudod?")
       return;
@@ -74,24 +76,17 @@ const useLogInUI = () => {
           newDate.setFullYear(newDate.getFullYear() + 1);
           setCookie("passwordHash", data[0].secretKey, { expires: newDate });
         }
-        setPassword("");
+        event.target[0].value = "";
         setCurrentUser(data[0]);
         setIsLoggedIn(true);
         toast.success("Sikeres bejelentkezés!")
       }
     } catch {
       toast.error("Hibás jelszó.");
-      setPassword("");
+      event.target[0].value = "";
     }
   };
 
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateRememberMe = (e) => {
-    setRememberMe(e.target.checked);
-  };
 
   const loginImage = React.useMemo(() => (
     <img src="/icons/login.png" alt="Windows XP login icon" style={{ width: "40px" }} />
@@ -121,8 +116,6 @@ const useLogInUI = () => {
           </div>
           <TextField
             label="Jelszó"
-            value={password}
-            onChange={updatePassword}
             type="password"
             autoComplete="current-password"
             autoFocus={true}
@@ -130,7 +123,7 @@ const useLogInUI = () => {
           />
           <FormControlLabel
             control={
-              <Checkbox checked={rememberMe} onChange={updateRememberMe} />
+              <Checkbox />
             }
             label="Maradjak bejelentkezve"
           />
