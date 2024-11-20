@@ -14,7 +14,7 @@
     "@sentry/cli": "^2.38.0",
     "@sentry/react": "^8.34.0",
     "@supabase/supabase-js": "^1.35.7",
-    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@vitejs/plugin-react": "^4.3.2",
