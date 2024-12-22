@@ -12,7 +12,7 @@
     "@mui/material": "^5.10.4",
     "@mui/x-date-pickers": "^7.20.0",
     "@sentry/cli": "^2.38.0",
-    "@sentry/react": "^8.34.0",
+    "@sentry/react": "^8.41.0",
     "@supabase/supabase-js": "^1.35.7",
     "@testing-library/jest-dom": "^6.0.0",
     "@testing-library/react": "^13.4.0",
